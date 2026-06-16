@@ -10,7 +10,7 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/summary", label: "Summary" },
   { href: "/skills", label: "Skills" },
-  { href: "/portfolio", label: "Portfolio" },
+  // { href: "/portfolio", label: "Portfolio" }, // TODO: Implement portfolio page
   { href: "/experience", label: "Experience" },
   { href: "/game", label: "Game" },
 ]
