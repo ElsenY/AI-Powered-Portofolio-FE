@@ -21,7 +21,7 @@ const companies = [
     ),
     detail:
       "Developed Synapsis flagship product : Nearon, an IOT sensor monitoring application, here I developed core features and endpoint, such as creating sensor automations and healthcheck system",
-    link: "https://about.netflix.com/",
+    link: "https://synapsis.id/",
   },
   {
     name: "Tokopedia",
