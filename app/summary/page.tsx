@@ -2,9 +2,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   Code,
-  Database,
-  Server,
-  Cloud,
   Briefcase,
   Gamepad2,
   Github,
@@ -12,21 +9,9 @@ import {
   Mail,
 } from "lucide-react";
 import { AnimatedSection } from "@/components/animated-section";
-import { AnimatedSkillBar } from "@/components/animated-skill-bar";
-
-const topSkillsLeft = [
-  { name: "Go" },
-  { name: "Redis" },
-  { name: "PostgreSQL" },
-  { name: "Docker" },
-];
-
-const topSkillsRight = [
-  { name: "Node.js/Typescript" },
-  { name: "Kafka" },
-  { name: "PostgreSQL" },
-  { name: "Docker" },
-];
+import { SkillCategorySection } from "@/components/skill-category-section";
+import { experiences } from "@/lib/experience-data";
+import { skillCategories } from "@/lib/skills-data";
 
 const featuredProjects = [
   {
@@ -43,27 +28,6 @@ const featuredProjects = [
     title: "Microservices E-commerce",
     description: "Multi-vendor marketplace handling 50K orders/day",
     tags: ["Node.js", "PostgreSQL", "RabbitMQ"],
-  },
-];
-
-const careerHighlights = [
-  {
-    title: "Middle Backend Engineer",
-    company: "Synapsis.id",
-    period: "2024-2025",
-    link: "https://synapsis.id",
-  },
-  {
-    title: "Backend Engineer",
-    company: "TikTok Tokopedia",
-    period: "2022 - 2024",
-    link: "https://shop-id.tokopedia.com/",
-  },
-  {
-    title: "Software Engineer",
-    company: "Itemku.com",
-    period: "2021 - 2022",
-    link: "https://itemku.com",
   },
 ];
 
@@ -104,133 +68,100 @@ export default function SummaryPage() {
           </div>
         </AnimatedSection>
 
-        {/* Two Column Layout */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-20">
-          {/* Skills */}
-          <AnimatedSection delay={200}>
-            <div className="bg-card border border-border rounded-xl p-6 h-full">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Code className="h-5 w-5 text-primary" />
-                  </div>
-                  <h2 className="text-xl font-semibold">Top Skills</h2>
-                </div>
-                <Link
-                  href="/skills"
-                  className="text-primary hover:underline text-sm flex items-center gap-1"
+        {/* Skills */}
+        <AnimatedSection delay={200} className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Code className="h-5 w-5 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold">Skills</h2>
+            </div>
+            <Link
+              href="/skills"
+              className="text-primary hover:underline text-sm flex items-center gap-1"
+            >
+              View all <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6 md:p-8">
+            <div className="grid sm:grid-cols-2 gap-8">
+              {skillCategories.map((category) => (
+                <div
+                  key={category.title}
+                  className={
+                    category.title === "Other Tools"
+                      ? "sm:col-span-2"
+                      : undefined
+                  }
                 >
-                  View all <ArrowRight className="h-3 w-3" />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-3">
-                  {topSkillsLeft.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center hover:cursor-pointer justify-between rounded-lg border border-border bg-muted/30 px-4 py-3 transition-all duration-300 hover:border-primary  hover:shadow-[0_0_12px_hsl(var(--primary)/0.75)]"
-                    >
-                      <p className="font-medium text-foreground">
-                        {skill.name}
-                      </p>
-                    </div>
-                  ))}
+                  <SkillCategorySection category={category} compact />
                 </div>
-                <div className="space-y-3">
-                  {topSkillsRight.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center hover:cursor-pointer justify-between rounded-lg border  border-border bg-muted/30 px-4 py-3 transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_hsl(var(--primary)/0.75)]"
-                    >
-                      <p className="font-medium text-foreground">
-                        {skill.name}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
 
-              <div className="mt-6 pt-6 border-t border-border">
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <Database className="h-5 w-5 text-primary mx-auto mb-1" />
-                    <p className="text-xs text-muted-foreground">6 Databases</p>
-                  </div>
-                  <div>
-                    <Cloud className="h-5 w-5 text-primary mx-auto mb-1" />
-                    <p className="text-xs text-muted-foreground">AWS/GCP</p>
-                  </div>
-                  <div>
-                    <Server className="h-5 w-5 text-primary mx-auto mb-1" />
-                    <p className="text-xs text-muted-foreground">
-                      Microservices
+        {/* Experience */}
+        <AnimatedSection delay={300} className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Briefcase className="h-5 w-5 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold">Experience</h2>
+            </div>
+            <Link
+              href="/experience"
+              className="text-primary hover:underline text-sm flex items-center gap-1"
+            >
+              View full <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6 md:p-8">
+            <div className="space-y-6">
+              {experiences.map((job, index) => (
+                <div
+                  key={`${job.company}-${job.period}`}
+                  className={`flex items-start gap-4 ${index < experiences.length - 1
+                    ? "pb-6 border-b border-border"
+                    : ""
+                    }`}
+                >
+                  <div
+                    className={`mt-1.5 h-3 w-3 shrink-0 rounded-full ${job.current ? "bg-primary" : "bg-muted-foreground/30"
+                      }`}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <a
+                      href={job.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary font-bold hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]"
+                    >
+                      {job.company}
+                    </a>
+                    <p className="text-sm font-medium">{job.title}</p>
+                    <p className="text-xs text-muted-foreground font-mono mt-1">
+                      {job.period}
                     </p>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          </AnimatedSection>
 
-          {/* Experience */}
-          <AnimatedSection delay={300}>
-            <div className="bg-card border border-border rounded-xl p-6 h-full">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Briefcase className="h-5 w-5 text-primary" />
-                  </div>
-                  <h2 className="text-xl font-semibold">Career</h2>
-                </div>
-                <Link
-                  href="/experience"
-                  className="text-primary hover:underline text-sm flex items-center gap-1"
-                >
-                  View full <ArrowRight className="h-3 w-3" />
-                </Link>
-              </div>
-
-              <div className="space-y-4">
-                {careerHighlights.map((job, index) => (
-                  <AnimatedSection
-                    key={job.title}
-                    delay={400 + index * 100}
-                    direction="left"
-                    className="flex items-start gap-4 pb-4 border-b border-border last:border-0 last:pb-0"
-                  >
-                    <div
-                      className={`mt-1 h-3 w-3 rounded-full ${index === 0 ? "bg-primary" : "bg-muted-foreground/30"}`}
-                    />
-                    <div className="flex-1">
-                      <a
-                        href={job.link}
-                        className="text-md text-primary font-bold hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]"
-                      >
-                        {job.company}
-                      </a>
-                      <p className="text-sm">{job.title}</p>
-                      <p className="text-xs text-muted-foreground font-mono mt-1">
-                        {job.period}
-                      </p>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-
-              <AnimatedSection
-                delay={700}
-                className="mt-6 pt-6 border-t border-border text-center"
-              >
-                <p className="text-sm text-primary mb-2">
-                  Bachelor of Computer Science
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Bina Nusantara University
-                </p>
-              </AnimatedSection>
+            <div className="mt-8 pt-6 border-t border-border text-center">
+              <p className="text-sm text-primary mb-2">
+                Bachelor of Computer Science
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Bina Nusantara University
+              </p>
             </div>
-          </AnimatedSection>
-        </div>
+          </div>
+        </AnimatedSection>
 
         {/* Featured Projects */}
         <AnimatedSection delay={400} className="mb-20">
@@ -306,7 +237,7 @@ export default function SummaryPage() {
 
             <div className="flex justify-center gap-6 mb-6">
               <a
-                href="https://github.com"
+                href="https://github.com/elseny"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
@@ -315,7 +246,7 @@ export default function SummaryPage() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/elsen-yacub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
@@ -323,21 +254,22 @@ export default function SummaryPage() {
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a
+              {/* TODO: Implement Email */}
+              {/* <a
                 href="mailto:hello@example.com"
                 className="p-3 bg-secondary hover:bg-secondary/80 rounded-lg transition-colors"
                 aria-label="Email"
               >
                 <Mail className="h-5 w-5" />
-              </a>
+              </a> */}
             </div>
 
-            <a
+            {/* <a
               href="mailto:hello@example.com"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
               Get in Touch
-            </a>
+            </a> */}
           </div>
         </AnimatedSection>
       </div>

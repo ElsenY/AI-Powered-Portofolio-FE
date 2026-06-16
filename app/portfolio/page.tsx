@@ -68,8 +68,8 @@ export default function PortfolioPage() {
             Portfolio
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-            A collection of backend systems, APIs, and infrastructure projects 
-            I&apos;ve built. Each project showcases different aspects of my expertise in 
+            A collection of backend systems, APIs, and infrastructure projects
+            I&apos;ve built. Each project showcases different aspects of my expertise in
             building scalable, reliable systems.
           </p>
         </AnimatedSection>
@@ -90,7 +90,7 @@ export default function PortfolioPage() {
                     <p className="text-muted-foreground mb-4 leading-relaxed">
                       {project.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.map((tag) => (
                         <span
@@ -199,11 +199,11 @@ export default function PortfolioPage() {
           <div className="bg-card border border-border rounded-xl p-8 md:p-12">
             <h2 className="text-2xl font-bold mb-4">Interested in working together?</h2>
             <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-              I&apos;m always open to discussing new projects and opportunities 
+              I&apos;m always open to discussing new projects and opportunities
               to build something great.
             </p>
             <a
-              href="mailto:hello@example.com"
+              href="mailto:elsenyacub@yahoo.co.id"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
               Get in touch

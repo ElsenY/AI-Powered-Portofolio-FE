@@ -9,9 +9,9 @@ interface AnimatedSectionProps {
   direction?: "up" | "down" | "left" | "right" | "fade"
 }
 
-export function AnimatedSection({ 
-  children, 
-  className = "", 
+export function AnimatedSection({
+  children,
+  className = "",
   delay = 0,
   direction = "up"
 }: AnimatedSectionProps) {
