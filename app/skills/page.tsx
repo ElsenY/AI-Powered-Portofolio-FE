@@ -31,12 +31,13 @@ export default function SkillsPage() {
               {skillCategories.map((category, index) => (
                 <AnimatedSection
                   key={category.title}
-                  delay={150 + index * 80}
+                  delay={50 + index * 30}
                   className={
                     category.title === "Other Tools"
                       ? "md:col-span-2"
                       : undefined
                   }
+                  rootMargin="100px"
                 >
                   <SkillCategorySection category={category} />
                 </AnimatedSection>
