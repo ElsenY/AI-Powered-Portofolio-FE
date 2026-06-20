@@ -93,10 +93,10 @@ export default function Home() {
                     <ArrowRight className="h-4 w-4" />
                   </a>
                   <Link
-                    href="/experience"
+                    href="/summary"
                     className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg font-medium hover:bg-secondary transition-colors"
                   >
-                    My Experience
+                    View Summary
                   </Link>
                 </div>
               </AnimatedSection>

@@ -7,13 +7,15 @@ interface AnimatedSectionProps {
   className?: string
   delay?: number
   direction?: "up" | "down" | "left" | "right" | "fade"
+  rootMargin?: string
 }
 
 export function AnimatedSection({
   children,
   className = "",
   delay = 0,
-  direction = "up"
+  direction = "up",
+  rootMargin = "100px",
 }: AnimatedSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -26,7 +28,7 @@ export function AnimatedSection({
           observer.unobserve(entry.target)
         }
       },
-      { threshold: 0.1, rootMargin: "50px" }
+      { threshold: 0.1, rootMargin: rootMargin }
     )
 
     if (ref.current) {
@@ -54,7 +56,7 @@ export function AnimatedSection({
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translate(0)" : getTransform(),
-        transition: `opacity 0.6s ease-out, transform 0.6s ease-out`,
+        transition: `opacity 0.4s ease-out, transform 0.4s ease-out`,
         transitionDelay: `${delay}ms`,
       }}
     >

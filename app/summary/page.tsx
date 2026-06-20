@@ -56,7 +56,7 @@ export default function SummaryPage() {
             ].map((stat, index) => (
               <AnimatedSection
                 key={stat.label}
-                delay={150 + index * 100}
+                delay={100 + index * 50}
                 className="bg-card border border-border rounded-xl p-6 text-center"
               >
                 <p className="text-3xl font-bold text-primary mb-1">
@@ -68,43 +68,8 @@ export default function SummaryPage() {
           </div>
         </AnimatedSection>
 
-        {/* Skills */}
-        <AnimatedSection delay={200} className="mb-20">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Code className="h-5 w-5 text-primary" />
-              </div>
-              <h2 className="text-2xl font-bold">Skills</h2>
-            </div>
-            <Link
-              href="/skills"
-              className="text-primary hover:underline text-sm flex items-center gap-1"
-            >
-              View all <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
-
-          <div className="bg-card border border-border rounded-xl p-6 md:p-8">
-            <div className="grid sm:grid-cols-2 gap-8">
-              {skillCategories.map((category) => (
-                <div
-                  key={category.title}
-                  className={
-                    category.title === "Other Tools"
-                      ? "sm:col-span-2"
-                      : undefined
-                  }
-                >
-                  <SkillCategorySection category={category} compact />
-                </div>
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
-
         {/* Experience */}
-        <AnimatedSection delay={300} className="mb-20">
+        <AnimatedSection delay={200} className="mb-20">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-primary/10 rounded-lg">
@@ -163,8 +128,43 @@ export default function SummaryPage() {
           </div>
         </AnimatedSection>
 
+        {/* Skills */}
+        <AnimatedSection delay={200} className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Code className="h-5 w-5 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold">Skills</h2>
+            </div>
+            <Link
+              href="/skills"
+              className="text-primary hover:underline text-sm flex items-center gap-1"
+            >
+              View all <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6 md:p-8">
+            <div className="grid sm:grid-cols-2 gap-8">
+              {skillCategories.map((category) => (
+                <div
+                  key={category.title}
+                  className={
+                    category.title === "Other Tools"
+                      ? "sm:col-span-2"
+                      : undefined
+                  }
+                >
+                  <SkillCategorySection category={category} compact />
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+
         {/* Featured Projects */}
-        <AnimatedSection delay={400} className="mb-20">
+        <AnimatedSection delay={200} className="mb-20">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold">Featured Projects</h2>
             <Link
@@ -179,7 +179,7 @@ export default function SummaryPage() {
             {featuredProjects.map((project, index) => (
               <AnimatedSection
                 key={project.title}
-                delay={500 + index * 100}
+                delay={200 + index * 50}
                 direction="up"
                 className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
               >
@@ -203,7 +203,16 @@ export default function SummaryPage() {
         </AnimatedSection>
 
         {/* Game Teaser */}
-        <AnimatedSection delay={600} className="mb-20">
+        <AnimatedSection delay={200} className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold">Try this Game</h2>
+            <Link
+              href="/game"
+              className="text-primary hover:underline text-sm flex items-center gap-1"
+            >
+              Play now <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
           <Link
             href="/game"
             className="block bg-gradient-to-br from-card to-secondary border border-border rounded-xl p-8 hover:border-primary/50 transition-colors group"
@@ -228,7 +237,7 @@ export default function SummaryPage() {
         </AnimatedSection>
 
         {/* Contact */}
-        <AnimatedSection delay={700} className="text-center">
+        <AnimatedSection delay={200} className="text-center">
           <div className="bg-card border border-border rounded-xl p-8 md:p-12">
             <h2 className="text-2xl font-bold mb-4">Let&apos;s Connect</h2>
             <p className="text-muted-foreground mb-6 max-w-md mx-auto">
