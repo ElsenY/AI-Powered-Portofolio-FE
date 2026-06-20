@@ -29,53 +29,57 @@ export default function ExperiencePage() {
             <div className="absolute left-[7px] top-3 bottom-3 w-px bg-border" />
 
             <div className="space-y-12">
-              {experiences.map((exp, index) => (
+              {experiences.map((exp) => (
                 <AnimatedSection
                   key={`${exp.company}-${exp.period}`}
-                  delay={200 + index * 150}
+                  delay={100}
+                  rootMargin="100px"
                   direction="left"
                   className="relative pl-8"
                 >
                   <div
-                    className={`absolute left-0 top-2 h-4 w-4 rounded-full border-2 ${
-                      exp.current
-                        ? "bg-primary border-primary"
-                        : "bg-background border-border"
-                    }`}
+                    className={`absolute left-0 top-2 h-4 w-4 rounded-full border-2 ${exp.current
+                      ? "bg-primary border-primary"
+                      : "bg-background border-border"
+                      }`}
                   />
 
                   <div className="bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary hover:shadow-[0_0_12px_hsl(var(--primary)/0.75)]">
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
                       <div>
-                        <h3 className="text-lg font-semibold">{exp.title}</h3>
+                        <h3 className="text-lg font-semibold">{exp.company}</h3>
                         <a
                           href={exp.link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-primary font-medium hover:underline"
                         >
-                          {exp.company}
+                          {exp.title}
                         </a>
                       </div>
                       <span
-                        className={`font-mono text-sm ${
-                          exp.current
-                            ? "text-primary"
-                            : "text-muted-foreground"
-                        }`}
+                        className={`font-mono text-sm ${exp.current
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                          }`}
                       >
                         {exp.period}
                       </span>
                     </div>
-
+                    <div className="mb-4 text-sm text-foreground/90">
+                      <p>{exp.intro}</p>
+                    </div>
+                    <div className="mb-2 text-sm text-primary">
+                      <p>Noteworthy contributions :</p>
+                    </div>
                     {exp.description && exp.description.length > 0 && (
                       <ul className="space-y-2">
                         {exp.description.map((item) => (
                           <li
                             key={item}
-                            className="text-muted-foreground text-sm flex gap-2"
+                            className="text-foreground/90 text-sm flex gap-2 "
                           >
-                            <span className="text-primary mt-1">›</span>
+                            <span className="text-primary align-top">›</span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -88,7 +92,7 @@ export default function ExperiencePage() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={700}>
+        <AnimatedSection delay={200} rootMargin="100px">
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2 bg-primary/10 rounded-lg">
               <GraduationCap className="h-5 w-5 text-primary" />
@@ -97,8 +101,9 @@ export default function ExperiencePage() {
           </div>
 
           <div className="bg-card border border-border rounded-xl p-6">
-            <h3 className="text-lg font-semibold">{education.degree}</h3>
-            <p className="text-muted-foreground">{education.school}</p>
+            <h3 className="text-lg font-semibold">{education.school}</h3>
+            <p className="text-muted-foreground">{education.degree}</p>
+            <p className="text-primary">{education.gpa}</p>
           </div>
         </AnimatedSection>
       </div>
