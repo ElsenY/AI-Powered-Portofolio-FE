@@ -13,8 +13,8 @@ export interface Project {
 export const FEATURED_REPOS = [
   "multistream-chat-aggregator",
   "ai-powered-portofolio-fe",
-  "dexen-backend",
-  "reconciliation-service",
+  "bingo-game",
+  "chat-starter-nodejs",
   "flearch",
 ];
 
