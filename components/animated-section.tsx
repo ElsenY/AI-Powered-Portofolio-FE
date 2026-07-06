@@ -57,7 +57,6 @@ export function AnimatedSection({
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translate(0)" : getTransform(),
         transition: `opacity 0.4s ease-out, transform 0.4s ease-out`,
-        transitionDelay: `${delay}ms`,
       }}
     >
       {children}
