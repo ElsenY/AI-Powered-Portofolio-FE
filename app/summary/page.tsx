@@ -13,25 +13,20 @@ import { SkillCategorySection } from "@/components/skill-category-section";
 import { experiences } from "@/lib/experience-data";
 import { skillCategories } from "@/lib/skills-data";
 
-const featuredProjects = [
-  {
-    title: "Distributed API Gateway",
-    description: "High-performance gateway handling 10M+ requests/day",
-    tags: ["Go", "Kubernetes", "Redis"],
-  },
-  {
-    title: "Real-time Analytics Pipeline",
-    description: "Stream processing for 5M events/hour",
-    tags: ["Python", "Kafka", "ClickHouse"],
-  },
-  {
-    title: "Microservices E-commerce",
-    description: "Multi-vendor marketplace handling 50K orders/day",
-    tags: ["Node.js", "PostgreSQL", "RabbitMQ"],
-  },
-];
+import { getGitHubProjects, FEATURED_REPOS } from "@/lib/github";
 
-export default function SummaryPage() {
+export const revalidate = 3600;
+
+export default async function SummaryPage() {
+  const projects = await getGitHubProjects();
+  const featuredProjects = projects
+    .filter((p) => p.featured)
+    .sort((a, b) => {
+      const idxA = FEATURED_REPOS.indexOf(a.name.toLowerCase());
+      const idxB = FEATURED_REPOS.indexOf(b.name.toLowerCase());
+      return idxA - idxB;
+    })
+    .slice(0, 3);
   return (
     <div className="pt-24 pb-20 px-6">
       <div className="mx-auto max-w-5xl">
@@ -177,27 +172,37 @@ export default function SummaryPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {featuredProjects.map((project, index) => (
-              <AnimatedSection
+              <a
                 key={project.title}
-                delay={200 + index * 50}
-                direction="up"
-                className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-colors"
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group"
               >
-                <h3 className="font-semibold mb-2">{project.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs font-mono"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </AnimatedSection>
+                <AnimatedSection
+                  delay={200 + index * 50}
+                  direction="up"
+                  className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-colors h-full"
+                >
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
+                    {project.title}
+                    <ArrowRight className="h-3 w-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs font-mono"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              </a>
             ))}
           </div>
         </AnimatedSection>
