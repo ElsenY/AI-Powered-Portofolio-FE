@@ -1,49 +1,101 @@
-import { TerminalGame } from "@/components/terminal-game"
+import Link from "next/link"
+import { ArrowRight, Shield, Terminal } from "lucide-react"
 import { AnimatedSection } from "@/components/animated-section"
 
-export default function GamePage() {
-  const instructions = [
-    { step: "1", title: "Start the game", description: 'Click "Start Hack" to begin the sequence' },
-    { step: "2", title: "Type the commands", description: "Type each command exactly as shown before time runs out" },
-    { step: "3", title: "Beat your score", description: "Complete more hacks to increase your score and level" },
-  ]
+const games = [
+  {
+    title: "Blockade",
+    description:
+      "Move your firewall, intercept incoming packets, and defend the network for as long as you can.",
+    href: "/game/blockade",
+    category: "Arcade · Reflex",
+    details: "10 integrity",
+    icon: Shield,
+  },
+  {
+    title: "Terminal Hacker",
+    description:
+      "Race against the clock and type terminal commands accurately to breach each target system.",
+    href: "/game/terminal-hacker",
+    category: "Typing · Speed",
+    details: "20 commands",
+    icon: Terminal,
+  },
+]
 
+export default function GamesPage() {
   return (
-    <div className="pt-24 pb-20 px-6">
-      <div className="mx-auto max-w-4xl">
-        {/* Header */}
-        <AnimatedSection className="mb-8 text-center">
-          <p className="text-primary font-mono text-sm tracking-wider uppercase mb-4">
+    <div className="px-6 pb-20 pt-24">
+      <div className="mx-auto max-w-5xl">
+        <AnimatedSection className="mb-12 text-center">
+          <p className="mb-4 font-mono text-sm uppercase tracking-wider text-primary">
             Take a break
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Terminal Hacker
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            A fun typing game where you &quot;hack&quot; into systems by typing commands 
-            as fast as you can. How many servers can you breach?
+          <h1 className="mb-6 text-4xl font-bold md:text-5xl">Game Lab</h1>
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Pick a challenge, sharpen your reflexes, and see how far you can go.
           </p>
         </AnimatedSection>
 
-        {/* Game Component */}
-        <AnimatedSection delay={200}>
-          <TerminalGame />
-        </AnimatedSection>
+        <section aria-labelledby="available-games-heading">
+          <AnimatedSection delay={150}>
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="mb-1 font-mono text-xs uppercase tracking-wider text-primary">
+                  Select a program
+                </p>
+                <h2 id="available-games-heading" className="text-2xl font-semibold">
+                  Available games
+                </h2>
+              </div>
+              <p className="font-mono text-xs text-muted-foreground">
+                {games.length} {games.length === 1 ? "game" : "games"}
+              </p>
+            </div>
+          </AnimatedSection>
 
-        {/* Instructions */}
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
-          {instructions.map((item, index) => (
-            <AnimatedSection
-              key={item.step}
-              delay={400 + index * 100}
-              className="bg-card border border-border rounded-xl p-5 text-center"
-            >
-              <p className="font-mono text-primary text-2xl mb-2">{item.step}</p>
-              <h3 className="font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-muted-foreground">{item.description}</p>
-            </AnimatedSection>
-          ))}
-        </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {games.map((game, index) => {
+              const Icon = game.icon
+
+              return (
+                <AnimatedSection key={game.href} delay={250 + index * 100} className="h-full">
+                  <Link
+                    href={game.href}
+                    className="group flex h-full flex-col rounded-xl border border-border bg-card p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  >
+                    <div className="mb-8 flex items-start justify-between gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <Icon className="h-6 w-6" aria-hidden="true" />
+                      </div>
+                      <span className="rounded-full border border-border bg-secondary/50 px-3 py-1 font-mono text-[11px] uppercase tracking-wide text-muted-foreground">
+                        {game.category}
+                      </span>
+                    </div>
+
+                    <div className="flex-1">
+                      <h3 className="mb-3 text-xl font-semibold transition-colors group-hover:text-primary">
+                        {game.title}
+                      </h3>
+                      <p className="leading-relaxed text-muted-foreground">{game.description}</p>
+                    </div>
+
+                    <div className="mt-8 flex items-center justify-between border-t border-border pt-4">
+                      <span className="font-mono text-xs text-muted-foreground">{game.details}</span>
+                      <span className="flex items-center gap-2 text-sm font-medium text-primary">
+                        Play now
+                        <ArrowRight
+                          className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </div>
+                  </Link>
+                </AnimatedSection>
+              )
+            })}
+          </div>
+        </section>
       </div>
     </div>
   )
